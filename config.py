@@ -1,4 +1,4 @@
-Token = "1886310974:AAE4-VYuv_ln0lOYNBG2ifqTADCPCExe1hA"#1921528305:AAGiUUBQ8Mq5zv6VKpPqJAvjlJGfzQzGsN4
+Token = "1921528305:AAGiUUBQ8Mq5zv6VKpPqJAvjlJGfzQzGsN4"
 HOST = "kashin.db.elephantsql.com"
 PASSWORD = "O3UdE5FHISRWH_eNJkrc2kjrbF-M40UN"
 USER = "tnqknhfg"
