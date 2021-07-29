@@ -1,8 +1,9 @@
 from telebot import types
 import config
+from database import db
 def member():
     markup = types.InlineKeyboardMarkup()
-    for text in config.KanalvaGuruhlar:
+    for text in db().filter("channels", "","",all=True):
         markup.add(
             types.InlineKeyboardButton(text=text[0], url="https://t.me/" + text[1])
         )

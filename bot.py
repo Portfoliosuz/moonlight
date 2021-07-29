@@ -58,7 +58,7 @@ def text(message):
                     db().update("users", "step", message.text, "id", id)
         else:
             bot.send_message(id, config.start_text.format(name, bot.get_me().username, config.member_text),
-                             reply_markup=keyboards.member(), parse_mode="html")
+                         reply_markup=keyboards.member(), parse_mode="html")
     except:
         print("xato")
 @bot.message_handler(content_types=["sticker", "photo", "audio","voice", "document", "video"])
@@ -79,6 +79,7 @@ def photo(message):
             db().update("users", "step", 0, "id", id)
         elif step != "break" and id in config.admins:
             db().add("contents", step, message_id, id)
+            bot.send_message(id, f"Add Information({message_id})")
     except:
         print("xato")
 print("Starting...")
