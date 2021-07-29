@@ -4,11 +4,11 @@ import config
 class db:
     def __init__(self):
         self.base = psycopg2.connect(
-            host=config.host,
-            database=config.database,
-            password=config.password,
-            user=config.user,
-            port=5432
+            host=config.HOST,
+            database=config.DATABASE_NAME,
+            password=config.PASSWORD,
+            user=config.USER,
+            port=config.PORT
         )
         print("Connected!")
         self.c = self.base.cursor()
@@ -93,4 +93,9 @@ if __name__ == "__main__":
         markup_name text,
         button_name text
     """ )
+    db().create_table("channels", """
+        name text,
+        url text
+    """)
+    # db().add("channels","channel name","channel url")
 

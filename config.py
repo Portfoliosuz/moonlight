@@ -1,9 +1,9 @@
-Token = "*"
-database = ""
-host = ""
-password = ""
-user= ""
+Token = "1921528305:AAGiUUBQ8Mq5zv6VKpPqJAvjlJGfzQzGsN4"
+HOST = "kashin.db.elephantsql.com"
+PASSWORD = "O3UdE5FHISRWH_eNJkrc2kjrbF-M40UN"
+USER = "tnqknhfg"
+DATABASE_NAME = "tnqknhfg"
+PORT = 5432
 start_text = "Assalomu alaykum <b>{}!</b>\n🤖@{} ga xush kelibsiz!\n\n{}\n<i>Dasturchi:  @IDiyorbekDev</i>"
 member_text = "<b>📥Ushbu botdan to'liq foydalanish uchun quyidagi kanallarga obuna bo'ling!👇</b>"
-KanalvaGuruhlar  = [["kanal nomi", "kanal silkasi"], ]
-admins = [admin_id, ...]
+admins = [1468429008]
