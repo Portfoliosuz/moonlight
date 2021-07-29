@@ -1,13 +1,13 @@
 import psycopg2
-
+import config
 
 class db:
-    def __init__(self, host="kashin.db.elephantsql.com"):
+    def __init__(self):
         self.base = psycopg2.connect(
-            host=host,
-            database="tnqknhfg",
-            password="O3UdE5FHISRWH_eNJkrc2kjrbF-M40UN",
-            user="tnqknhfg",
+            host=config.host,
+            database=config.database,
+            password=config.password,
+            user=config.user,
             port=5432
         )
         print("Connected!")
