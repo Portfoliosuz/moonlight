@@ -97,5 +97,5 @@ if __name__ == "__main__":
         name text,
         url text
     """)
-    # db().add("channels","channel name","channel url")
+    db().add("channels","MoonLight | Company","moonlightdesign")
 

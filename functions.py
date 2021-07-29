@@ -12,8 +12,7 @@ def get_chat_member(id):
     return True
 def copy_message(chat_id, message_id, from_chat_id):
     re = requests.get(f"https://api.telegram.org/bot{config.Token}/copyMessage?chat_id={chat_id}&message_id={message_id}&from_chat_id={from_chat_id}")
-    re = json.loads(re.text)["result"]["message_id"]
-    return re
+    
 
 def send_tanleng(bot, id,text):
     keys = []
