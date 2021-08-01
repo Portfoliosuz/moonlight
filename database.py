@@ -1,15 +1,9 @@
 import psycopg2
 import config
-
+import sqlite3
 class db:
     def __init__(self):
-        self.base = psycopg2.connect(
-            host=config.HOST,
-            database=config.DATABASE_NAME,
-            password=config.PASSWORD,
-            user=config.USER,
-            port=config.PORT
-        )
+        self.base = sqlite3.connect("data.db")
         print("Connected!")
         self.c = self.base.cursor()
 
@@ -39,7 +33,6 @@ class db:
             print(f"Updated {table_name} table {value2} = {word2}")
             self.commit()
         except:
-
             print("Not updated ")
 
     def delete(self, table_name, value, word):
@@ -51,9 +44,33 @@ class db:
             self.commit()
         except:
             print("Not deleted ")
+    def copy_all_info(self, table_name):
+        base = psycopg2.connect(
+        host=config.HOST,
+        database=config.DATABASE_NAME,
+        password=config.PASSWORD,
+        user=config.USER,
+        port=config.PORT
+        )
+        cur = base.cursor()
+        for content in self.c.execute(f"select * from {table_name}").fetchall():
+            cur.execute(f"select * from {table_name}")
+            if content in cur.fetchall():
+                print(content)
+                continue
+            print("added ", content)
+            cur.execute(
+                f"insert into {str(table_name)} values {content}"
+            )
+        base.commit()
+        base.close()
 
+       
     def add(self, table_name, *values):
         try:
+            if values in self.c.execute(f"select * from {table_name}").fetchall():
+                print("This informations is exists")
+                return True
             self.c.execute(
                 f"insert into {str(table_name)} values {values}"
             )
@@ -98,4 +115,5 @@ if __name__ == "__main__":
         url text
     """)
     db().add("channels","MoonLight | Company","moonlightdesign")
+
 

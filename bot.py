@@ -3,6 +3,7 @@ import config
 from datetime import datetime
 from functions import get_chat_member, copy_message,send_tanleng
 import keyboards
+import json
 from database import db
 bot = TeleBot(config.Token)
 @bot.message_handler(commands = ["start"])
@@ -32,15 +33,28 @@ def text(message):
                 db().update("users", "step", "rek", "id", id)
                 bot.send_message(id, "Send me Reklama👇")
             elif message.text[:9] == "addbutton":
-                text = list(str(message.text).split())
-                db().add("keyboards", text[1], text[2])
-                bot.send_message(id, f"<b>{text[2]}  qo'shildi!</b>", parse_mode="html")
+                dic = json.loads(message.text[9:])
+                for c in dic.keys():
+                    db().add("keyboards", c, dic[c])
+                    bot.send_message(id, f"<b>{dic[c]}  qo'shildi!</b>", parse_mode="html")
+            elif message.text == "copy_all":
+                try:
+                    db().copy_all_info("users")
+                    db().copy_all_info("contents")
+                    db().copy_all_info("keyboards")
+                    bot.send_message(id, "copy all informations")
+                except:
+                    bot.send_message(id, "ooooops")
             else:
                 db().update("users", "step", message.text, "id", id)
+                if message.text.lower() == "break":
+                    bot.send_message(id, "Added all informations!")
+                    return True
                 bot.send_message(id, "Send me Content👇")
         elif get_chat_member(id):
                 send_tanleng(bot, id, message.text)
                 for content in db().filter("contents", "button_name", message.text):
+                    print(content)
                     copy_message(id, content[1], content[2])
                     return True
                 if message.text == "🔙Orqaga":
@@ -77,7 +91,7 @@ def photo(message):
                     print("ooooops")
             bot.send_message(id, f"<code>Foydalanuvchilar soni: <b>{users}</b> ta</code>\n<i>{datetime.now().strftime('%d.%m.%y  %H:%M holatiga ko`ra')}</i>\n@{bot.get_me().username}", parse_mode='html')
             db().update("users", "step", 0, "id", id)
-        elif step != "break" and id in config.admins:
+        elif step.lower() != "break" and id in config.admins:
             db().add("contents", step, message_id, id)
             bot.send_message(id, f"Add Information({message_id})")
     except:
