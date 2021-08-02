@@ -28,7 +28,7 @@ class db:
     def update(self, table_name, value1, word1, value2, word2):
         try:
             self.c.execute(
-                f"update {table_name} set {value1} = '{word1}' where {value2} = '{word2}'"
+                f"""update {table_name} set {value1} = '{word1}' where {value2} = '{word2}'"""
             )
             print(f"Updated {table_name} table {value2} = {word2}")
             self.commit()
