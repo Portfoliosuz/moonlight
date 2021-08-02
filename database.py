@@ -64,7 +64,25 @@ class db:
             )
         base.commit()
         base.close()
-
+    def copy_all_info_to_sql(self, table_name):
+        base = psycopg2.connect(
+        host=config.HOST,
+        database=config.DATABASE_NAME,
+        password=config.PASSWORD,
+        user=config.USER,
+        port=config.PORT
+        )
+        cur = base.cursor()
+        for content in cur.execute(f"select * from {table_name}").fetchall():
+            self.c.execute(f"select * from {table_name}")
+            if content in self.c.fetchall():
+                print(content)
+                continue
+            print("added ", content)
+            self.c.execute(
+                f"insert into {str(table_name)} values {content}"
+            )
+        self.commit()
        
     def add(self, table_name, *values):
         try:
