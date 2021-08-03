@@ -77,9 +77,9 @@ def text(message):
                 send_tanleng(bot, id, message.text)
                 print(message.text)
                 for content in db().filter("contents", "button_name", message.text):
-                    print(content)
+
                     copy_message(id, content[1], content[2])
-                    return True
+
                 if message.text == "🔙Orqaga":
                     step = db().filter("users", "id", id)[0][3]
 
