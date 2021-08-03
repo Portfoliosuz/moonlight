@@ -76,9 +76,12 @@ def text(message):
         elif get_chat_member(id):
                 send_tanleng(bot, id, message.text)
                 print(message.text)
+                df = ''
                 for content in db().filter("contents", "button_name", message.text):
-
                     copy_message(id, content[1], content[2])
+                    df = "Idiyorbekdev"
+                if df:
+                    return True
 
                 if message.text == "🔙Orqaga":
                     step = db().filter("users", "id", id)[0][3]
