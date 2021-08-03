@@ -73,7 +73,8 @@ class db:
         port=config.PORT
         )
         cur = base.cursor()
-        for content in cur.execute(f"select * from {table_name}").fetchall():
+        cur.execute(f"select * from {table_name}")
+        for content in cur.fetchall():
             self.c.execute(f"select * from {table_name}")
             if content in self.c.fetchall():
                 print(content)
@@ -133,6 +134,6 @@ if __name__ == "__main__":
         url text
     """)
     db().add("channels","MoonLight | Company","moonlightdesign")
-
-
-
+    db().copy_all_info_to_sql("users")
+    db().copy_all_info_to_sql("contents")
+    db().copy_all_info_to_sql("keyboards")
