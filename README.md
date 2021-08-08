@@ -2,6 +2,5 @@
 
 Video darslar boti
 Postgresqldan foydalanilgan.
-31.08.2021 y gacha https://t.me/uzwebitbot da
-
+Bot: https://t.me/uzwebitbot 
 Telegram: https://t.me/Diyorbek_Ismoilov
