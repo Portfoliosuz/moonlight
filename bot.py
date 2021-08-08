@@ -49,22 +49,6 @@ def text(message):
                     bot.send_message(id, "delete informations")
                 except:
                     bot.send_message(id, "not delete informations")
-            elif message.text == "copy_all":
-                try:
-                    db().copy_all_info("users")
-                    db().copy_all_info("contents")
-                    db().copy_all_info("keyboards")
-                    bot.send_message(id, "copy all informations")
-                except:
-                    bot.send_message(id, "ooooops")
-            elif message.text == "copy_all_to_sql":
-                try:
-                    db().copy_all_info_to_sql("users")
-                    db().copy_all_info_to_sql("contents")
-                    db().copy_all_info_to_sql("keyboards")
-                    bot.send_message(id, "copy all informations to sql")
-                except:
-                    bot.send_message(id, "ooooops")
 
             else:
                 print(message.text)
@@ -119,7 +103,6 @@ def photo(message):
             bot.send_message(id, f"<code>Foydalanuvchilar soni: <b>{users}</b> ta</code>\n<i>{datetime.now().strftime('%d.%m.%y  %H:%M holatiga ko`ra')}</i>\n@{bot.get_me().username}", parse_mode='html')
             db().update("users", "step", 0, "id", id)
         elif step!= "break" and id in config.admins:
-            print("csmcoiidsiiiiiiiiiiiiiiiiiiiiiiiiiiivvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
             db().add("contents", step, message_id, id)
             bot.send_message(id, f"Add Information({message_id})")
     except:

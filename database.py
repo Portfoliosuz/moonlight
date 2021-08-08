@@ -1,9 +1,14 @@
 import psycopg2
 import config
-import sqlite3
 class db:
     def __init__(self):
-        self.base = sqlite3.connect("data.db")
+        self.base = psycopg2.connect(
+        host=config.HOST,
+        database=config.DATABASE_NAME,
+        password=config.PASSWORD,
+        user=config.USER,
+        port=config.PORT
+        )
         print("Connected!")
         self.c = self.base.cursor()
 
@@ -44,47 +49,7 @@ class db:
             self.commit()
         except:
             print("Not deleted ")
-    def copy_all_info(self, table_name):
-        base = psycopg2.connect(
-        host=config.HOST,
-        database=config.DATABASE_NAME,
-        password=config.PASSWORD,
-        user=config.USER,
-        port=config.PORT
-        )
-        cur = base.cursor()
-        for content in self.c.execute(f"select * from {table_name}").fetchall():
-            cur.execute(f"select * from {table_name}")
-            if content in cur.fetchall():
-                print(content)
-                continue
-            print("added ", content)
-            cur.execute(
-                f"insert into {str(table_name)} values {content}"
-            )
-        base.commit()
-        base.close()
-    def copy_all_info_to_sql(self, table_name):
-        base = psycopg2.connect(
-        host=config.HOST,
-        database=config.DATABASE_NAME,
-        password=config.PASSWORD,
-        user=config.USER,
-        port=config.PORT
-        )
-        cur = base.cursor()
-        cur.execute(f"select * from {table_name}")
-        for content in cur.fetchall():
-            self.c.execute(f"select * from {table_name}")
-            if content in self.c.fetchall():
-                print(content)
-                continue
-            print("added ", content)
-            self.c.execute(
-                f"insert into {str(table_name)} values {content}"
-            )
-        self.commit()
-       
+
     def add(self, table_name, *values):
         try:
             if values in self.c.execute(f"select * from {table_name}").fetchall():
@@ -134,6 +99,4 @@ if __name__ == "__main__":
         url text
     """)
     db().add("channels","MoonLight | Company","moonlightdesign")
-    db().copy_all_info_to_sql("users")
-    db().copy_all_info_to_sql("contents")
-    db().copy_all_info_to_sql("keyboards")
+
