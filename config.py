@@ -4,6 +4,6 @@ PASSWORD = "-"
 USER = "-"
 DATABASE_NAME = "-"
 PORT = "-"
-start_text = "Assalomu alaykum <b>{}!</b>\n🤖@{} ga xush kelibsiz!\n\n{}\n<i>Dasturchi:  @IDiyorbekDev</i>"
+start_text = "Assalomu alaykum <b>{}!</b>\n🤖@{} ga xush kelibsiz!\n\n{}\n<i>Dasturchi:  @webtechgo</i>"
 member_text = "<b>📥Ushbu botdan to'liq foydalanish uchun quyidagi kanallarga obuna bo'ling!👇</b>"
 admins = [123456789]
